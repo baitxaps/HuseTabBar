@@ -5,6 +5,19 @@
 #  To learn more about Podspec attributes see https://guides.cocoapods.org/syntax/podspec.html
 #  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
 #
+# 以新开一个Terminal窗口，cd到~/.cocoapods目录，用du -sh *来查看下载进度。
+# tips:
+# https://cloud.tencent.com/developer/article/1647742
+# https://blog.csdn.net/BUG_delete/article/details/104780608
+
+# --------------------------------------------------------------------------------
+#  🎉  Congrats
+
+#  🚀  HuseTabBar (0.0.1) successfully published
+#  📅  March 9th, 03:10
+#  🌎  https://cocoapods.org/pods/HuseTabBar
+#  👍  Tell your friends!
+# --------------------------------------------------------------------------------
 
 Pod::Spec.new do |spec|
 
@@ -16,8 +29,8 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HuseTabBar"
-  spec.version      = "0.0.1"
-  spec.summary      = "A short description of HuseTabBar."
+  spec.version      = "0.0.2"
+  spec.summary      = "HuseTabBar."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +38,7 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-      A short description of HuseTabBar.A short description of HuseTabBar.
+    一款简单实用的自定义的TabBar.
                    DESC
 
   spec.homepage     = "https://github.com/baitxaps/HuseTabBar"
@@ -90,12 +103,29 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
-
+  #spec.source_files  =  "HuseTabBar/*.{h,m}"
+  #spec.source_files  = "Classes", "Classes/**/*.{h,m}"
+  #spec.exclude_files = "Classes/Exclude"
   # spec.public_header_files = "Classes/**/*.h"
 
+  #*当前目录的所有文件
+  #** 递归匹配
+  #abc/**/*.{h,m} abc目录以及子目录，所有以.h和.m结尾的文件
+  #{} 匹配任意一个
+  #abc/**/*.h abc目录以及子目录，所有以.h结尾的文件
 
+  # 文件层级分类
+  spec.source_files = 'HuseTabBar/Classes/**/*'
+  # 要是文件有分层 就这样写
+  spec.subspec 'ZXLoadingView' do |ss|
+    ss.source_files = 'HuseTabBar/Classes/ZXLoadingView/*.{h,m}'
+  end
+
+  spec.subspec 'ZXUIView' do |ss|
+    ss.source_files = 'HuseTabBar/Classes/ZXUIView/*.{h,m}'
+  end
+
+  
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  A list of resources included with the Pod. These are copied into the
@@ -103,6 +133,7 @@ Pod::Spec.new do |spec|
   #  You can preserve files from being cleaned, please don't preserve
   #  non-essential files like tests, examples and documentation.
   #
+
 
   # spec.resource  = "icon.png"
   # spec.resources = "Resources/*.png"
@@ -121,7 +152,7 @@ Pod::Spec.new do |spec|
 
   # spec.library   = "iconv"
   # spec.libraries = "iconv", "xml2"
-
+  spec.ios.frameworks = 'Foundation', 'UIKit'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -134,4 +165,16 @@ Pod::Spec.new do |spec|
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # spec.dependency "JSONKit", "~> 1.4"
 
+  # 资源 -------hint---------
+  #  s.resource_bundles = {
+  #   'HuseTabBar' => ['HuseTabBar/Assets/*.{png,json,xcassets}']
+  #  }
+  # s.public_header_files = 'Pod/Classes/**/*.h'
+  # s.frameworks = 'UIKit', 'MapKit'
+  # 依赖库
+  # s.dependency 'AFNetworking'
+  # s.dependency 'JSONModel'
+  # s.dependency 'lottie-ios','2.5.3' # 指定版本
+  # s.dependency 'ZXTest2OCUIKit'
+  #-------hint---------
 end
